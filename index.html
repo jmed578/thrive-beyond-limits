@@ -514,7 +514,6 @@
   class="application-body"
   id="applicationForm"
   method="POST"
-  action="https://formspree.io/f/xjgpobod"
   novalidate
 >
 <input type="hidden" name="_subject" value="New Thrive Beyond Limits application">
@@ -684,6 +683,7 @@
       const stepLabel = document.getElementById('stepLabel');
       const successBox = document.getElementById('successBox');
       const summary = document.getElementById('applicationSummary');
+      const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjgpobod";
       let currentStep = 0;
 
       function getFieldsForStep(stepIndex) {
@@ -756,10 +756,33 @@
   renderStep();
   return;
 }
-// Last step: validate and submit to Formspree
+// Last step: validate and submit via AJAX to stay on page
 if (!validateStep(currentStep)) return;
 updateSummary();
-form.submit();
+
+const formData = new FormData(form);
+
+nextButton.disabled = true;
+nextButton.textContent = 'Submitting…';
+
+fetch(FORMSPREE_ENDPOINT, {
+  method: 'POST',
+  body: formData,
+  headers: { 'Accept': 'application/json' }
+})
+  .then(function (response) {
+    if (!response.ok) throw new Error('Network response was not ok');
+    successBox.classList.add('is-visible');
+    nextButton.textContent = 'Application submitted';
+    backButton.disabled = true;
+  })
+  .catch(function () {
+    successBox.classList.add('is-visible');
+    successBox.querySelector('p').textContent =
+      'Your application was captured locally, but there was an issue sending it. Please refresh and try again or email us directly.';
+    nextButton.textContent = 'Try again';
+    nextButton.disabled = false;
+  });
       });
 
       backButton.addEventListener('click', function () {
