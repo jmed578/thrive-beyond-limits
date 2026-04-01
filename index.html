@@ -510,7 +510,14 @@
               <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
             </div>
           </div>
-          <form class="application-body" id="applicationForm" novalidate>
+          <form
+  class="application-body"
+  id="applicationForm"
+  method="POST"
+  action="https://formspree.io/f/xjgpobod"
+  novalidate
+>
+<input type="hidden" name="_subject" value="New Thrive Beyond Limits application">
             <div class="step-pane is-active" data-step="1">
               <div class="field-grid">
                 <div class="field">
@@ -745,15 +752,14 @@
         successBox.classList.remove('is-visible');
         if (!validateStep(currentStep)) return;
         if (currentStep < steps.length - 1) {
-          currentStep += 1;
-          renderStep();
-          return;
-        }
-        updateSummary();
-        successBox.classList.add('is-visible');
-        nextButton.textContent = 'Application submitted';
-        nextButton.disabled = true;
-        backButton.disabled = true;
+  currentStep += 1;
+  renderStep();
+  return;
+}
+// Last step: validate and submit to Formspree
+if (!validateStep(currentStep)) return;
+updateSummary();
+form.submit();
       });
 
       backButton.addEventListener('click', function () {
