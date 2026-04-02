@@ -106,7 +106,7 @@
     }
     .brand { display: inline-flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); letter-spacing: 0.16em; text-transform: uppercase; }
     .brand-mark { width: 2rem; height: 2rem; color: var(--color-accent); }
-    .nav-links { display: flex; gap: var(--space-5); color: var(--color-text-muted); font-size: var(--text-sm); }
+    .nav-links { display: flex; gap: var(--space-5); color: var(--color-text-muted); font-size: var(--text-sm); margin-left: auto; }
     .nav-links a:hover { color: var(--color-text); }
     .header-actions { display: flex; align-items: center; gap: var(--space-3); }
 
@@ -313,13 +313,11 @@
         <a href="#shift">Shift</a>
         <a href="#venue">Venue</a>
         <a href="#guide">Team</a>
-        <a href="#apply">Apply</a>
       </nav>
       <div class="header-actions">
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"></button>
-        <a class="btn btn-secondary" href="#venue">Retreat Venue</a>
-        <a class="nav-apply" href="#apply">Apply for the Cohort</a>
-      </div>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch theme"></button>
+  <a class="nav-apply" href="#apply">Apply for the Cohort</a>
+</div>
     </div>
   </header>
 
@@ -436,7 +434,7 @@
     <section id="guide">
       <div class="wide-container split">
         <div data-reveal="left">
-          <span class="section-label">The Guide</span>
+          <span class="section-label">The Guides</span>
           <h2>Expert support for the person behind the role.</h2>
           <p style="margin-top:1.5rem;">We do not teach leadership theory from a distance. We work on the physical, mental, and strategic patterns that shape how you actually lead under pressure.</p>
         </div>
