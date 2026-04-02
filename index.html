@@ -160,10 +160,15 @@
       transform: scale(1.02);
     }
     .hero-overlay {
-      position: absolute; inset: 0; display: grid; align-content: end; padding: clamp(var(--space-6), 4vw, var(--space-10));
-      background: linear-gradient(180deg, rgba(15,38,34,0.08) 18%, rgba(15,38,34,0.68) 100%);
-      color: #f6f2ed;
-    }
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+  background: linear-gradient(180deg, rgba(15,38,34,0.08) 18%, rgba(15,38,34,0.68) 100%);
+  color: #f6f2ed;
+}
     .hero-overlay p { color: rgba(246, 242, 237, 0.82); max-width: 28ch; }
     .hero-facts {
       margin-top: var(--space-6); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3);
@@ -332,17 +337,16 @@
             <a class="btn btn-primary" href="#apply">Apply for the Cohort</a>
             <a class="btn btn-secondary" href="#venue">Download the Retreat Overview</a>
           </div>
-          <div class="hero-note">Reference imagery is used for this build so we can lock in visual direction before swapping in final venue photography.</div>
+          
         </div>
         <figure class="hero-visual" data-reveal="right">
           <img src="hero.jpg" alt="Bali retreat villa with pool" width="2000" height="1334" fetchpriority="high" decoding="async">
           <figcaption class="hero-overlay">
-            <h3 style="font-family: var(--font-display); font-size: 1.45rem; margin-bottom: 0.75rem;">The noise stops here.</h3>
-            <p>A setting built for nervous-system downshift, private reflection, and a steadier return to leadership.</p>
+            <h3 style="font-family: var(--font-display); font-size: 1.45rem; margin-bottom: 0.25rem; margin-top: auto;">Sukawati, Bali.</h3>
             <div class="hero-facts">
-              <div class="hero-fact"><strong>7 days</strong><span>Guided reset in Bali.</span></div>
-              <div class="hero-fact"><strong>3 guides</strong><span>Body, mind, integration.</span></div>
-              <div class="hero-fact"><strong>1 application</strong><span>Fit-first admission flow.</span></div>
+              <div class="hero-fact"><strong>7 days</strong><span>Fully private. Fully guided.</span></div>
+              <div class="hero-fact"><strong>3 guides</strong><span>Body work, mindset, and integration.</span></div>
+              <div class="hero-fact"><strong>15 SEATS</strong><span>Application only. Limited intake.</span></div>
             </div>
           </figcaption>
         </figure>
