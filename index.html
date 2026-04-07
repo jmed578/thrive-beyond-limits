@@ -195,6 +195,125 @@
     .stack-item:first-child { border-top: 0; padding-top: 0; }
     .kicker { color: var(--color-accent); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: var(--space-2); }
 
+  /* SECTION: Lead Generator (thin banner) */
+#lead-generator {
+  padding: clamp(var(--space-8), 8vh, var(--space-10)) 0;
+}
+
+/* Banner container – uses same theme variables as .card */
+.lead-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  background: var(--color-surface);      /* inverts via [data-theme] vars */
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+/* Left text block */
+.lead-banner-text h2 {
+  font-size: clamp(1.3rem, 2vw, 1.7rem);  /* thinner than hero headings */
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.lead-banner-text p {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Ensure text stays readable in dark mode */
+[data-theme="dark"] .lead-banner-text h2,
+[data-theme="dark"] .lead-banner-text p {
+  color: var(--color-text);
+}
+
+/* Inline form on the right */
+.lead-banner-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+/* Visually hidden label for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Email input */
+.lead-banner-form input[type="email"] {
+  min-width: 220px;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+}
+
+/* Input in dark mode */
+[data-theme="dark"] .lead-banner-form input[type="email"] {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--color-text);
+}
+
+/* Lead magnet button – distinct from main Apply CTA */
+.button.lead-banner-button {
+  background: transparent;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 0.65rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.button.lead-banner-button:hover {
+  background: var(--color-primary-highlight);
+}
+
+/* Dark mode button tweak (uses same accent variable) */
+[data-theme="dark"] .button.lead-banner-button {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Responsive: stack layout on small screens */
+@media (max-width: 768px) {
+  .lead-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lead-banner-form {
+    width: 100%;
+  }
+
+  .lead-banner-form input[type="email"] {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .button.lead-banner-button {
+    white-space: nowrap;
+  }
+}
+
     .venue-grid {
       grid-template-columns: 1fr 1fr 1fr;
       align-items: stretch;
@@ -212,11 +331,31 @@
     }
     .venue-caption p { color: rgba(248, 246, 243, 0.82); max-width: 28ch; font-size: var(--text-sm); }
 
-    .why-panel {
+   /* .why-panel {
       background: linear-gradient(145deg, var(--color-primary), color-mix(in srgb, var(--color-primary) 78%, black));
       color: var(--color-text-inverse); border-radius: calc(var(--radius-xl) + 0.2rem); padding: clamp(var(--space-8), 5vw, var(--space-12)); box-shadow: var(--shadow-lg);
     }
-    .why-panel p { color: rgba(248,246,243,0.84); font-size: var(--text-lg); max-width: 48ch; }
+    .why-panel p { color: rgba(248,246,243,0.84); font-size: var(--text-lg); max-width: 48ch; } */
+
+    .why-panel {
+  background: linear-gradient(
+    145deg,
+    var(--color-primary),
+    color-mix(in srgb, var(--color-primary) 78%, black)
+  );
+  color: var(--color-text-inverse);  /* heading + default text color */
+  border-radius: calc(var(--radius-xl) + 0.2rem);
+  padding: clamp(var(--space-8), 5vw, var(--space-12));
+  box-shadow: var(--shadow-lg);
+}
+
+/* Let paragraph follow the panel’s text color (it will invert with the theme) */
+.why-panel p {
+  color: var(--color-text-inverse);
+  font-size: var(--text-lg);
+  max-width: 48ch;
+}
+
 
     .application-shell {
       background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: calc(var(--radius-xl) + 0.2rem); overflow: hidden; box-shadow: var(--shadow-md);
@@ -403,6 +542,31 @@
       </div>
     </section>
 
+    <section id="lead-generator" class="section" aria-labelledby="lead-generator-heading">
+  <div class="wide-container">
+    <div class="lead-banner" data-reveal>
+      <div class="lead-banner-text">
+        <h2 id="lead-generator-heading">5 Daily Shifts for Steadier Leadership</h2>
+        <p>Five daily shifts to reduce physical tension, lower decision fatigue, and help you lead with more steadiness — even inside a full schedule.</p>
+      </div>
+
+      <form class="lead-banner-form" action="#" method="post">
+        <label class="sr-only" for="lead-email">Email</label>
+        <input
+          id="lead-email"
+          name="email"
+          type="email"
+          placeholder="Enter your work email"
+          required
+        />
+        <button type="submit" class="button lead-banner-button">
+          Get the 5 Daily Shifts
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
     <section id="venue">
       <div class="wide-container">
         <div class="section-intro" data-reveal>
@@ -490,8 +654,8 @@
   <div class="wide-container">
     <div class="why-panel" data-reveal>
       <span class="section-label" style="color: #AD7052;">The Why</span>
-      <h2 style="color: #0F2622; margin-bottom: 1.25rem;">High performance becomes expensive when recovery disappears.</h2>
-      <p style="color: #0F2622;">Most leaders do not need more pressure. They need better regulation. When your body is no longer bracing and your mind is no longer overloaded, you think more clearly, communicate more cleanly, and lead with more range. That is the work.</p>
+      <h2>High performance becomes expensive when recovery disappears.</h2>
+      <p>Most leaders do not need more pressure. They need better regulation. When your body is no longer bracing and your mind is no longer overloaded, you think more clearly, communicate more cleanly, and lead with more range. That is the work.</p>
     </div>
   </div>
 </section>
