@@ -244,9 +244,14 @@
 /* Inline form on the right */
 .lead-banner-form {
   display: flex;
+  align-items: column;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+.lead-banner-form-row {
+  display: flex;
   align-items: center;
   gap: var(--space-3);
-  flex-shrink: 0;
 }
 
 /* Visually hidden label for accessibility */
@@ -264,9 +269,7 @@
 
 /* Email input */
 .lead-banner-form input[type="email"] {
-  min-width: 220px;
-  flex: 1;
-  min-width: 0;
+  min-width: 240px;
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -313,10 +316,14 @@
   .lead-banner-form {
     width: 100%;
   }
+.lead-banner-form-row {
+  width: 100%;
+  flex-wrap: wrap;
+}
 
   .lead-banner-form input[type="email"] {
-    flex: 1;
-    min-width: 0;
+    width: 100%;
+  min-width: 0;
   }
 
   .button.lead-banner-button {
@@ -561,18 +568,21 @@
       </div>
 
       <form class="lead-banner-form" id="lead-banner-form" method="post" novalidate>
-  <label class="sr-only" for="lead-email">Email</label>
-  <input
-    id="lead-email"
-    name="email"
-    type="email"
-    placeholder="Enter your work email"
-    required
-    autocomplete="email"
-  />
-  <button type="submit" class="button lead-banner-button">
-    Get the 5 Daily Shifts
-  </button>
+  <div class="lead-banner-form-row">
+    <label class="sr-only" for="lead-email">Email</label>
+    <input
+      id="lead-email"
+      name="email"
+      type="email"
+      placeholder="Enter your work email"
+      required
+      autocomplete="email"
+    />
+    <button type="submit" class="button lead-banner-button">
+      Get the 5 Daily Shifts
+    </button>
+  </div>
+
   <p id="lead-form-message" class="lead-form-message" role="status" aria-live="polite"></p>
 </form>
     </div>
