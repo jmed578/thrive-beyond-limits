@@ -5,7 +5,7 @@ export default {
     if (request.method === 'POST' && url.pathname === '/api/lead-magnet') {
       try {
         const { email, source, interest } = await request.json();
-        const listId = parseInt(env.BREVO_LIST_ID, 10);
+        const listId = 3;
 
         if (!email || !email.includes('@')) {
           return Response.json(

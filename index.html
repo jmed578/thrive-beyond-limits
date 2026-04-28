@@ -247,7 +247,6 @@
   align-items: center;
   gap: var(--space-3);
   flex-shrink: 0;
-  /* flex-wrap: wrap; */
 }
 
 /* Visually hidden label for accessibility */
@@ -266,6 +265,8 @@
 /* Email input */
 .lead-banner-form input[type="email"] {
   min-width: 220px;
+  flex: 1;
+  min-width: 0;
   padding: 0.65rem 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -288,6 +289,8 @@
   padding: 0.65rem 1.4rem;
   font-size: 0.9rem;
   font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .button.lead-banner-button:hover {
