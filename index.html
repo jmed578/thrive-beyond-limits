@@ -199,6 +199,12 @@
 #lead-generator {
   padding: clamp(var(--space-8), 8vh, var(--space-10)) 0;
 }
+.lead-form-message {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-text-muted, #666);
+  width: 100%;
+}
 
 /* Banner container – uses same theme variables as .card */
 .lead-banner {
@@ -241,6 +247,7 @@
   align-items: center;
   gap: var(--space-3);
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 /* Visually hidden label for accessibility */
@@ -550,19 +557,21 @@
         <p>Five daily shifts to reduce physical tension, lower decision fatigue, and help you lead with more steadiness — even inside a full schedule.</p>
       </div>
 
-      <form class="lead-banner-form" action="#" method="post">
-        <label class="sr-only" for="lead-email">Email</label>
-        <input
-          id="lead-email"
-          name="email"
-          type="email"
-          placeholder="Enter your work email"
-          required
-        />
-        <button type="submit" class="button lead-banner-button">
-          Get the 5 Daily Shifts
-        </button>
-      </form>
+      <form class="lead-banner-form" id="lead-banner-form" method="post" novalidate>
+  <label class="sr-only" for="lead-email">Email</label>
+  <input
+    id="lead-email"
+    name="email"
+    type="email"
+    placeholder="Enter your work email"
+    required
+    autocomplete="email"
+  />
+  <button type="submit" class="button lead-banner-button">
+    Get the 5 Daily Shifts
+  </button>
+  <p id="lead-form-message" class="lead-form-message" role="status" aria-live="polite"></p>
+</form>
     </div>
   </div>
 </section>
@@ -962,5 +971,52 @@ fetch(FORMSPREE_ENDPOINT, {
       renderStep();
     }());
   </script>
+
+  <script>
+  const leadBannerForm = document.getElementById('lead-banner-form');
+  const leadEmailInput = document.getElementById('lead-email');
+  const leadFormMessage = document.getElementById('lead-form-message');
+
+  if (leadBannerForm && leadEmailInput && leadFormMessage) {
+    leadBannerForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const email = leadEmailInput.value.trim();
+
+      if (!email) {
+        leadFormMessage.textContent = 'Please enter your email.';
+        return;
+      }
+
+      leadFormMessage.textContent = 'Submitting...';
+
+      try {
+        const response = await fetch('/api/lead-magnet', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email,
+            source: 'website',
+            interest: '5_daily_shifts'
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Something went wrong. Please try again.');
+        }
+
+        leadFormMessage.textContent = 'Success. Check your inbox for the 5 Daily Shifts.';
+        leadBannerForm.reset();
+      } catch (error) {
+        leadFormMessage.textContent = error.message || 'There was a problem submitting your email.';
+      }
+    });
+  }
+</script>
+
 </body>
 </html>
