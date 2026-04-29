@@ -38,24 +38,35 @@ export default {
           })
         });
 
-        const brevoData = await brevoResponse.json();
+        try {
+  ...
+  const brevoResponse = await fetch(...);
 
-        if (!brevoResponse.ok) {
-          return Response.json(
-            { message: brevoData.message || 'Unable to save your email right now.' },
-            { status: brevoResponse.status }
-          );
-        }
+  let brevoData = null;
 
-        return Response.json(
-          { message: 'Contact added successfully.' },
-          { status: 200 }
-        );
-      } catch (error) {
-        return Response.json(
-          { message: 'Server error. Please try again in a moment.' },
-          { status: 500 }
-        );
+  try {
+    brevoData = await brevoResponse.json();
+  } catch (error) {
+    brevoData = null;
+  }
+
+  if (!brevoResponse.ok) {
+    return Response.json(
+      { message: brevoData?.message || 'Unable to save your email right now.' },
+      { status: brevoResponse.status }
+    );
+  }
+
+  return Response.json(
+    { message: 'Contact added successfully.' },
+    { status: 200 }
+  );
+} catch (error) {
+  return Response.json(
+    { message: 'Server error. Please try again in a moment.' },
+    { status: 500 }
+  );
+}
       }
     }
 
